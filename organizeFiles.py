@@ -3,13 +3,15 @@ from pathlib import Path, PurePath, PurePosixPath
 from shutil import move
 
 SUBDIR = {
-        "DOCUMENTS": [".pdf", ".docx", ".doc", ".txt", ".xls", ".ppt", ".xlsx"],
-        "AUDIOS": [".m4a", ".m4b", ".mp3", ".wav"],
-        "VIDEOS": [".mp4", ".MOV", ".mov", ".wmv", ".VOB", ".BUP", ".IFO", ".flv", ".aac"],
-        "IMAGES": [".jpg", ".jpeg", ".png", ".tif", ".psd", ".ai"],
+       "DOCUMENTS": [".pdf", ".docx", ".doc", ".txt", ".xls", ".ppt", ".xlsx", ".odt", ".pptx"],
+        "AUDIOS": [".m4a", ".m4b", ".mp3", ".wav", ".amr"],
+        "VIDEOS": [".mp4", ".MOV", ".mov", ".wmv", ".VOB", ".BUP", ".IFO", ".flv", ".aac", ".3gp"],
+        "IMAGES": [".jpg", ".jpeg", ".png", ".tif", ".psd", ".ai", ".gif", ".ico", ".cr2"],
         "COMPRESS": [".zip", ".rar", ".part"],
-        "CODE_SCRIPT": [".py", ".htm", ".html", ".php", ".c", ".cpp", ".js", ".css"],
-        "FONTS": [".ttf", ".TTF", ".woff", ".woff2"]
+        "CODE_SCRIPT": [".py", ".htm", ".html", ".php", ".c", ".cpp", ".js", ".css", ".sh", ".bat", ".VBS"],
+        "FONTS": [".ttf", ".TTF", ".woff", ".woff2"],
+        "PROGRAMS": [".exe", ".dll", ".dmg", ".deb", ".tar", ".iso", ".msi"],
+        "DATABASES": [".db", ".sql", ".sqlite"]
         }
 
 def pickDir(value):
