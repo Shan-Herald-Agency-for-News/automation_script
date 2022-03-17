@@ -34,9 +34,14 @@ def check_and_rename(file, add=0):
         add += 1
         check_and_rename(original_file, add)
 
+
 def organize(parentsDir):
     # for each deep file in dir
     for root, dirs, files in os.walk(parentsDir, topdown=False):
+        # skip "ORGANIZED" dir
+        if "ORGANIZED" in root:
+            continue
+
         for name in files:
             # full file path
             filePath = Path(os.path.join(root, name))
