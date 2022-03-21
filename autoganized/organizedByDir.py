@@ -80,11 +80,8 @@ def organize(parentsDir):
                 # move if file not exists yet.
                 move(filePath, directoryPath)
 
-def organizeFiles():
+def organizeFiles(cwd):
     # for each dir with well organize
-    for item in os.scandir():
+    for item in os.scandir(cwd):
         parentsDir = Path(item)
         organize(parentsDir)
-
-        
-organizeFiles()

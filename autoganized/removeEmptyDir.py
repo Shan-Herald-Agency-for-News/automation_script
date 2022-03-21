@@ -13,9 +13,7 @@ def removeEmptyDir(parentsDir):
 
         shutil.rmtree(Path(item))
 
-def walkInDir():
-    for item in os.scandir():
+def walkInDir(cwd):
+    for item in os.scandir(cwd):
         if item.is_dir():
             removeEmptyDir(item.name)
-
-walkInDir()

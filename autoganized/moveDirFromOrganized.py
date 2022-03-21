@@ -8,10 +8,8 @@ def moveFrom_Organized(parentDir):
         shutil.move(os.path.join(rootDir, item), os.path.join(parentDir, item))
     os.rmdir(rootDir)
 
-def walkInDir():
-    for item in os.scandir():
+def walkInDir(cwd):
+    for item in os.scandir(cwd):
         if os.path.isfile(item):
             continue
         moveFrom_Organized(item.name)
-
-walkInDir()
