@@ -3,7 +3,7 @@ from pathlib import Path, PurePath, PurePosixPath
 from shutil import move
 
 SUBDIR = {
-       "DOCUMENTS": [".pdf", ".docx", ".doc", ".txt", ".xls", ".ppt", ".xlsx", ".odt", ".pptx"],
+       "DOCUMENTS": [".pdf", ".docx", ".doc", ".txt", ".xls", ".ppt", ".xlsx", ".odt", ".pptx", ".pmd"],
         "AUDIOS": [".m4a", ".m4b", ".mp3", ".wav", ".amr"],
         "VIDEOS": [".mp4", ".MOV", ".mov", ".wmv", ".VOB", ".BUP", ".IFO", ".flv", ".aac", ".3gp"],
         "IMAGES": [".jpg", ".jpeg", ".png", ".tif", ".psd", ".ai", ".gif", ".ico", ".cr2"],
