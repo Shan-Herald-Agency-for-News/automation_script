@@ -5,7 +5,7 @@ from shutil import move
 SUBDIR = {
         "DOCUMENTS": [".pdf", ".docx", ".doc", ".txt", ".xls", ".ppt", ".xlsx", ".odt", ".pptx", ".pmd", ".wps"],
         "AUDIOS": [".m4a", ".m4b", ".mp3", ".wav", ".amr"],
-        "VIDEOS": [".mp4", ".MOV", ".mov", ".wmv", ".VOB", ".BUP", ".IFO", ".flv", ".aac", ".3gp"],
+        "VIDEOS": [".mp4", ".MOV", ".mov", ".wmv", ".vob", ".bup", ".ifo", ".flv", ".aac", ".3gp"],
         "IMAGES": [".jpg", ".jpeg", ".png", ".tif", ".psd", ".ai", ".gif", ".ico", ".cr2", ".eps", ".bmp"],
         "COMPRESS": [".zip", ".rar", ".part"],
         "CODE_SCRIPT": [".py", ".htm", ".html", ".php", ".c", ".cpp", ".js", ".css", ".sh", ".bat", ".VBS"],
