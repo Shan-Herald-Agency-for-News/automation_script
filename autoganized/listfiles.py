@@ -6,17 +6,15 @@ import json
 from bson import json_util
 from collections import OrderedDict
 
-
 def listfiles(parentsDir):
-    id = 0
-    dict_list = []
-
+    global id, dict_list
     for root, dirs, files in os.walk(parentsDir, topdown=True):
         for file in files:
             rootPath = os.path.dirname(root)
             rootPathName = os.path.basename(rootPath)
 
             fileName, fileType = os.path.splitext(file)
+            fileType_name = fileType.split(".")[-1]
             filePath = os.path.join(root, file)
 
             c_time = os.path.getctime(filePath)
@@ -28,7 +26,7 @@ def listfiles(parentsDir):
             dlist = OrderedDict()
             dlist["id"] = id
             dlist["name"] = rootPathName + " - " + fileName
-            dlist["type"] = fileType.split(".")[0]
+            dlist["type"] = fileType_name.lower()
             dlist["path"] = filePath
             dlist["create_time"] = dt_c
             dlist["modifiled_time"] = dt_m
@@ -41,11 +39,15 @@ def listfiles(parentsDir):
     with open("filelist_db.json", "w", encoding="utf8") as f:
         f.write(j)
 
+id = 0
+dict_list = []
+
 def main():
     cwd = os.getcwd()
     for item in os.scandir(cwd):
         parentsDir = Path(item)
-        listfiles(parentsDir)
+        if not os.path.isfile(parentsDir):
+            listfiles(parentsDir)
 
 if __name__ == '__main__':
     main()
