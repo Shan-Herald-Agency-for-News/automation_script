@@ -3,15 +3,19 @@
 import facebook
 import json
 
-token = {'EAAIHErrxSpkBAIE7NWvagLgZAPNuQchaLKvPEs2LGgROZAftBFwH6eFLC3bSctraq9rXmZCWdgPUnoISHMAVl2F9WXASRB8XdEnrQgDtV4yKoB0eK3WvKmYtNNmOLZBsvh6gkONN9xo427FSUqSjLdHGXEmI4wJun88C4u0JsyxnSSe0UzHen0KZAGHFaQ7LGfOmuwb6tg3C6ZCRnOesFJGQgLPBJ7RMcZD'}
-graph = facebook.GraphAPI(token)
+
+token = {""}
+graph = facebook.GraphAPI(shan_token)
+
+posts_count = 0
 
 def main():
     get_data(['id', 'title'])
 
 def get_data(fields):
-    id = 'shannews/live_videos'
+    id = 'shannews'
     data = graph.get_object(id, fields=fields)
+    posts_count = posts_count + data['summary']['total_count']
     print(data['paging']['next'])
 
 
