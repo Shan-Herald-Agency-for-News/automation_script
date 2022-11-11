@@ -1,13 +1,25 @@
 import axios from "axios";
 import fs from "fs";
 
-const startDate = new Date("2021, 12, 31");
-const endDate = new Date("2022, 11, 1");
+const since = "2022-01-01";
+const until = "2022-12-31";
+const startDate = new Date(since);
+const endDate = new Date(until);
 
-const token = ""
+const api_token = "";
 let posts_count = 0;
 
 async function _fetchAPI(next) {
+
+  var twirlTimer = (function() {
+    var P = ["\\", "|", "/", "-"];
+    var x = 0;
+    return setInterval(function() {
+      process.stdout.write("\r" + P[x++]);
+      x &= 3;
+    }, 250);
+  })();
+
   await axios
     .get(next)
     .then((res) => {
@@ -15,7 +27,7 @@ async function _fetchAPI(next) {
 
       
       for (let i = 0; i < data.length; i++) {
-        let bDate = new Date(data[i].created_time);
+        let bDate = new Date(data[i]?.created_time);
 
         if (bDate >= startDate && bDate <= endDate) {
           posts_count += 1;
@@ -29,38 +41,47 @@ async function _fetchAPI(next) {
         }
       }
 
-      let next_page = res.data["paging"].next;
+      let next_page = res.data["paging"]?.next || null;
 
       if (next_page) {
+
         _fetchAPI(next_page);
+
+        clearInterval(twirlTimer);
       } else {
         console.log("Posts Count: " + posts_count);
-        console.log("Last Date: " + res.data["data"][res.data["data"].length - 1].created_time);
+        console.log("Last Date: " + res.data["data"][res.data["data"].length - 1]?.created_time);
         console.log("Finished ...");
+        clearInterval(twirlTimer);
       }
 
     })
     .catch((error) => {
       console.log(error);
+      process.exit()
     });
 }
 
 function main() {
-//  const live_videos = "title,broadcast_start_time,permalink_url";
-//  const videos = "id,description,created_time";
-//  const fields = videos;
-//  const url = `https://graph.facebook.com/v15.0/shannews/published_posts?access_token=${token}&pretty=1&fields=${fields}&limit=250&before=QVFIUkZA3bXg1Q2djQk9GX0pXMTAyT09RSmFRRUJUeVBWc080TDRoVVltOW1YYjlRMzB3alFpRFdEMWpSZAUNrM0pHZAzJkeHR4WGdFbGtWZAHhnYUg5SHJ5SzVR`;
 
   //count posts
-  const token = shan_token;
-  const postField = "id,created_time, permalink_url";
-  const postURL = `https://graph.facebook.com/v15.0/shannews/posts?access_token=${token}&fields=${postField}&since=2021-12-31&limit=100`;
-  const videosURL = `https://graph.facebook.com/v15.0/shannews/videos?access_token=${token}&fields=${postField}&since=2021-12-31&limit=100`;
+  const token = api_token;
+  const postField = "id,created_time";
+  const page = "shannewsenglish"
+
+  console.log(`Fetch page: ${page}`);
+  console.log(`DateTime Fetch: ${since} - ${until}\n`);
+
+  // facebook endpoints
+  const postURL = `https://graph.facebook.com/v15.0/${page}/published_posts?access_token=${token}&fields=${postField}&since=${since}&until=${until}&limit=100`;
+  const videosURL = `https://graph.facebook.com/v15.0/${page}/videos?access_token=${token}&fields=${postField}&since=${since}&until=${until}&limit=100`;
+  const liveVideosURL = `https://graph.facebook.com/v15.0/${page}/live_videos?access_token=${token}&fields=${postField}&since=${since}&until=${until}&limit=100`;
 
  // shannews/published_posts?fields=id,created_time&summary=total_count&since=2022-01-01
 
   _fetchAPI(postURL);
   _fetchAPI(videosURL);
+  _fetchAPI(liveVideosURL);
 }
 
 main();
